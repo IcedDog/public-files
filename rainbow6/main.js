@@ -116,11 +116,11 @@ function renderTexture(gl, program, texture) {
   gl.vertexAttribPointer(texCoordLocation, 2, gl.FLOAT, false, 0, 0);
 
   gl.uniformMatrix4fv(matrixLocation, false, [
-      2, 0, 0, 0,
-      0, -2, 0, 0,
-      0, 0, 1, 0,
-      -1, 1, 0, 1,
-  ]);
+  1, 0, 0, 0,
+  0, -1, 0, 0,
+  0, 0, 1, 0,
+  0, 0, 0, 1,
+]);
 
   gl.uniform1i(samplerLocation, 0);
 
@@ -146,12 +146,13 @@ function setRectangle(gl, x, y, width, height) {
   ]), gl.STATIC_DRAW);
 }
 
-const video = document.querySelectorAll("video[id^='video-']")[0];
+let video = document.querySelectorAll("video[id^='video-']")[0];
 const canvas = document.createElement("canvas");
+const reloadBtn = document.getElementsByClassName('icon')[8];
 canvas.style.position = "absolute";
 canvas.style.top = "0px";
 canvas.style.left = "0px";
-canvas.style.zIndex = "1";
+canvas.style.zIndex = "5";
 canvas.style.width = "100%";
 canvas.style.height = "100%";
 canvas.style.overflow = "hidden";
@@ -165,6 +166,7 @@ video.addEventListener('play', () => {
   );
 
   function render() {
+    if(document.getElementById(video.id) == null)video = document.querySelectorAll("video[id^='video-']")[0];
     const texture = loadTexture(gl, video);
     renderTexture(gl, shaderProgram, texture);
     requestAnimationFrame(render);
