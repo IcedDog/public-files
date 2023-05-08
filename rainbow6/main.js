@@ -146,9 +146,36 @@ function setRectangle(gl, x, y, width, height) {
   ]), gl.STATIC_DRAW);
 }
 
+function runProgram(){
+  const shaderProgram = createProgram(
+    gl,
+    createShader(gl, gl.VERTEX_SHADER, vertexShaderSource),
+    createShader(gl, gl.FRAGMENT_SHADER, fragmentShaderSource)
+  );
+
+  function render() {
+    if(document.getElementById(video.id) == null) video = document.querySelectorAll("video[id^='video-']")[0];
+    const texture = loadTexture(gl, video);
+    if (enabled) {
+      canvas.style.display = "unset";
+      renderTexture(gl, shaderProgram, texture);
+    }
+    else{
+      canvas.style.display = "none";
+    }
+    enabled = checkBox.checked;
+    requestAnimationFrame(render);
+  }
+
+  requestAnimationFrame(render);
+}
+
+let enabled = false;
 let video = document.querySelectorAll("video[id^='video-']")[0];
 const canvas = document.createElement("canvas");
 const reloadBtn = document.getElementsByClassName('icon')[8];
+canvas.width = 1920;
+canvas.height = 1080;
 canvas.style.position = "absolute";
 canvas.style.top = "0px";
 canvas.style.left = "0px";
@@ -158,19 +185,12 @@ canvas.style.height = "100%";
 canvas.style.overflow = "hidden";
 video.parentNode.insertBefore(canvas, video.nextSibling);
 const gl = canvas.getContext("webgl");
-video.addEventListener('play', () => {
-  const shaderProgram = createProgram(
-    gl,
-    createShader(gl, gl.VERTEX_SHADER, vertexShaderSource),
-    createShader(gl, gl.FRAGMENT_SHADER, fragmentShaderSource)
-  );
+window.onload = runProgram();
 
-  function render() {
-    if(document.getElementById(video.id) == null)video = document.querySelectorAll("video[id^='video-']")[0];
-    const texture = loadTexture(gl, video);
-    renderTexture(gl, shaderProgram, texture);
-    requestAnimationFrame(render);
-  }
-
-  requestAnimationFrame(render);
-});
+const btnAfter = document.getElementsByClassName('popular-and-hot-rank')[0];
+const checkBox = document.createElement("input");
+checkBox.type="checkbox";
+checkBox.value="启用 Shader";
+checkBox.style.margin="5px";
+checkBox.innerHTML="启用 Shader";
+btnAfter.parentNode.insertBefore(checkBox, btnAfter.nextSibling);
