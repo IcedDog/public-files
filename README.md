@@ -7,3 +7,5 @@
 `Soflan chan`: [BV1as4y187rr](https://www.bilibili.com/video/BV1as4y187rr/)
 
 `Cooked Meat`: [BV1co4y1k7u8](https://www.bilibili.com/video/BV1co4y1k7u8/)
+
+`rainbow6`: [CV23511634](https://www.bilibili.com/read/cv23511634)
