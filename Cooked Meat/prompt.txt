@@ -1,2 +1,0 @@
-Organise the following sentences into the structure I require. Ignore all of the timestamps and new lines. Place correct punctuations in the sentences. Correct all of the spelling mistakes and add the missing words if grammaticly wrong, but don't change anything that'll change the position of the words or the meaning of the words.
-Important: Line each sentences on a single line. If the sentence has more than 10 words, you should split the sentence into multiple lines.
